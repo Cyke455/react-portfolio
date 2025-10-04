@@ -30,22 +30,27 @@ export default defineConfig({
           }
         ]
       },
-     workbox: {
-  globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-  maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10 MB
-  runtimeCaching: [
-    {
-      urlPattern: /^https:\/\/api\./,
-      handler: 'NetworkFirst',
-      options: {
-        cacheName: 'api-cache',
-        expiration: {
-          maxEntries: 100,
-          maxAgeSeconds: 60 * 60 * 24
-        }
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10 MB
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/api\./,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'api-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24
+              }
+            }
+          }
+        ]
       }
+    }), react()],
+      build: {
+    rollupOptions: {
+      external: ['bootstrap']
     }
-  ]
-}
-    }),react()],
+  }
 })
